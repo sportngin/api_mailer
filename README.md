@@ -15,7 +15,7 @@ class MailingBase < ApiMailer::Base
   def build_message
     # This method must be defined, it builds the package for deliver
     # here is an example json object
-    headers.extract(:to).merge(html: responses.html_part.to_s).to_json
+    headers.extract(:to).merge(html: responses.html_part.body.to_s).to_json
   end
   
   def deliver_message(message)
