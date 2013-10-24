@@ -10,10 +10,24 @@
 ## Usage
 
 ```ruby
+# app/mailers/mailing_base.rb
+class MailingBase < ApiMailer::Base
+  def build_message
+    # This method must be defined, it builds the package for deliver
+    # here is an example json object
+    headers.extract(:to).merge(html: responses.html_part.to_s).to_json
+  end
+  
+  def deliver_message(message)
+    #send the message somewhere using POST or whatever
+  end
+end
+
 # app/mailers/my_mailer.rb
-class MyMailer < ApiMailer::Base
+class MyMailer < MailingBase
   def cool_message_bro(user)
     @user = user
+    mail(to: "email_me@example.com", other_header: "value")
   end
 end
 
