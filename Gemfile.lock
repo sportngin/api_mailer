@@ -2,8 +2,8 @@ PATH
   remote: .
   specs:
     api_mailer (0.0.1)
-      actionpack
-      active_support
+      actionpack (>= 3.0)
+      active_support (>= 3.0)
 
 GEM
   remote: https://rubygems.org/
