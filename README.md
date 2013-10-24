@@ -33,6 +33,9 @@ end
 
 # app/views/my_mailer/cool_message_bro.html.erb
 Cool message, <%= @user.name %>!
+
+# sending mail
+MyMailer.cool_message_bro(user).deliver
 ```
 
 ## Configuration
