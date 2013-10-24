@@ -5,7 +5,7 @@ ApiMailer::Configuration.instance_eval do
     @filepath ||= Rails.root.join("config/api_mailer.yml")
   end
   def configurations
-    @configurations ||=
+    @configurations ||= load_config
   end
 
   def load_config
