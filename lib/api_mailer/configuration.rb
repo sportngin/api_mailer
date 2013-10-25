@@ -15,7 +15,6 @@ ApiMailer::Configuration.instance_eval do
       raise Exception.new("File not found: config/api_mailer.yml")
     end
   end
-  private :load_config
 
   def get(name)
     configurations[name.to_s]
