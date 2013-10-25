@@ -15,7 +15,7 @@ class MailingBase < ApiMailer::Base
   def build_message
     # This method must be defined, it builds the package for deliver
     # here is an example json object
-    headers.extract(:to).merge(html: responses.html_part.body.to_s).to_json
+    headers.extract(:to, :from, :subject).merge(html: responses.html_part.body.to_s).to_json
   end
   
   def deliver_message(message)
@@ -27,7 +27,10 @@ end
 class MyMailer < MailingBase
   def cool_message_bro(user)
     @user = user
-    mail(to: "email_me@example.com", other_header: "value")
+    mail(to: "email_me@example.com", 
+         from: "sender@example.com",
+         subject: "Cool Message for you, Bro",
+         other_header: "value")
   end
 end
 
