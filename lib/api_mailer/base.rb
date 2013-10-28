@@ -4,6 +4,11 @@ module ApiMailer
     abstract!
 
     include AbstractController::Rendering
+    include AbstractController::Logger
+    include AbstractController::Helpers
+    include AbstractController::Translation
+    include AbstractController::AssetPaths
+    include AbstractController::Callbacks
 
     attr_accessor :action_name
     attr_accessor :responses
@@ -50,7 +55,7 @@ module ApiMailer
       end
 
       # Handle defaults
-      self.headers = ActiveSupport::HashWithIndifferentAccess.new(headers.reverse_merge(default_values))
+      self.headers = ActiveSupport::HashWithIndifferentAccess.new(headers.reverse_merge(default_values)) || {}
 
       collect_responses(headers)
     end
@@ -71,7 +76,7 @@ module ApiMailer
 
         self.responses << {
           body: render(template: template),
-          content_type: template.type.to_s
+          content_type: (template.respond_to?(:type) ? template.type : template.mime_type).to_s
         }
       end
     end
