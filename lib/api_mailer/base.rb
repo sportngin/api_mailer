@@ -55,7 +55,7 @@ module ApiMailer
       end
 
       # Handle defaults
-      self.headers = ActiveSupport::HashWithIndifferentAccess.new(headers.reverse_merge(default_values)) || {}
+      self.headers = ActiveSupport::HashWithIndifferentAccess.new(default_values.merge(headers)) || {}
 
       collect_responses(headers)
     end
