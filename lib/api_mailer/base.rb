@@ -47,7 +47,7 @@ module ApiMailer
       process(action_name, *args)
     end
 
-    def mail(headers={})
+    def mail(headers={}, &block)
       # Call all the procs (if any)
       default_values = {}
       self.class.default.each do |k,v|
@@ -57,7 +57,7 @@ module ApiMailer
       # Handle defaults
       self.headers = ActiveSupport::HashWithIndifferentAccess.new(default_values.merge(headers)) || {}
 
-      collect_responses(headers)
+      collect_responses(headers, &block)
     end
 
     def deliver
@@ -69,15 +69,21 @@ module ApiMailer
     end
 
     def collect_responses(headers)
-      templates_name = headers.delete(:template_name) || action_name
+      if block_given?
+        collector = ActionMailer::Collector.new(lookup_context) { render(action_name) }
+        yield(collector)
+        self.responses = collector.responses
+      else
+        templates_name = headers.delete(:template_name) || action_name
 
-      each_template(templates_path(headers), templates_name) do |template|
-        self.formats = template.formats
+        each_template(templates_path(headers), templates_name) do |template|
+          self.formats = template.formats
 
-        self.responses << {
-          body: render(template: template),
-          content_type: (template.respond_to?(:type) ? template.type : template.mime_type).to_s
-        }
+          self.responses << {
+            body: render(template: template),
+            content_type: (template.respond_to?(:type) ? template.type : template.mime_type).to_s
+          }
+        end
       end
     end
 
@@ -94,11 +100,12 @@ module ApiMailer
       end
     end
 
+    def text_part
+      Hashie::Mash.new(responses.select{|part| part[:content_type] == "text/plain"}.first).presence
+    end
 
-    [:html_part, :text_part].each do |part|
-      define_method part do
-        Hashie::Mash.new(responses.select{|part| part[:content_type] == "text/html"}.first).presence
-      end
+    def html_part
+      Hashie::Mash.new(responses.select{|part| part[:content_type] == "text/html"}.first).presence
     end
 
     def process(method_name, *args)
