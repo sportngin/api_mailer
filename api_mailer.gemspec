@@ -12,6 +12,7 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(spec)/})
   gem.name          = "api_mailer"
   gem.require_paths = ["lib"]
+  gem.license       = "MIT"
   gem.version       = ApiMailer::VERSION
 
   gem.add_development_dependency "rspec"
