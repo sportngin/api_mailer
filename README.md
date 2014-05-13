@@ -44,3 +44,4 @@ MyMailer.cool_message_bro(user).deliver
 ## Configuration
 
 _*Coming Soon!*_
+
