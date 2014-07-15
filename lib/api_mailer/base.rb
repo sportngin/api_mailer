@@ -10,6 +10,8 @@ module ApiMailer
     include AbstractController::AssetPaths
     include AbstractController::Callbacks
 
+    include ActionView::Layouts if defined?(ActionView::Layouts)
+
     attr_accessor :action_name
     attr_accessor :responses
     attr_accessor :headers

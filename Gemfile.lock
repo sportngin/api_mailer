@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    api_mailer (0.0.3)
+    api_mailer (0.0.4)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       hashie
@@ -9,20 +9,22 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    actionpack (4.0.0)
-      activesupport (= 4.0.0)
-      builder (~> 3.1.0)
-      erubis (~> 2.7.0)
+    actionpack (4.1.4)
+      actionview (= 4.1.4)
+      activesupport (= 4.1.4)
       rack (~> 1.5.2)
       rack-test (~> 0.6.2)
-    activesupport (4.0.0)
-      i18n (~> 0.6, >= 0.6.4)
-      minitest (~> 4.2)
-      multi_json (~> 1.3)
+    actionview (4.1.4)
+      activesupport (= 4.1.4)
+      builder (~> 3.1)
+      erubis (~> 2.7.0)
+    activesupport (4.1.4)
+      i18n (~> 0.6, >= 0.6.9)
+      json (~> 1.7, >= 1.7.7)
+      minitest (~> 5.1)
       thread_safe (~> 0.1)
-      tzinfo (~> 0.3.37)
-    atomic (1.1.10)
-    builder (3.1.4)
+      tzinfo (~> 1.1)
+    builder (3.2.2)
     columnize (0.3.6)
     debugger (1.6.2)
       columnize (>= 0.3.1)
@@ -32,10 +34,10 @@ GEM
     debugger-ruby_core_source (1.2.3)
     diff-lcs (1.2.4)
     erubis (2.7.0)
-    hashie (2.0.5)
-    i18n (0.6.4)
-    minitest (4.7.5)
-    multi_json (1.7.7)
+    hashie (3.2.0)
+    i18n (0.6.11)
+    json (1.8.1)
+    minitest (5.4.0)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -47,9 +49,9 @@ GEM
     rspec-expectations (2.14.3)
       diff-lcs (>= 1.1.3, < 2.0)
     rspec-mocks (2.14.4)
-    thread_safe (0.1.2)
-      atomic
-    tzinfo (0.3.38)
+    thread_safe (0.3.4)
+    tzinfo (1.2.1)
+      thread_safe (~> 0.1)
 
 PLATFORMS
   ruby

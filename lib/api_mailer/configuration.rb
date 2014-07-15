@@ -1,3 +1,4 @@
+require 'yaml'
 ApiMailer::Configuration = Object.new
 
 ApiMailer::Configuration.instance_eval do
