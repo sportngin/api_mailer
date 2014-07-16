@@ -5,3 +5,4 @@ gemspec :path => '../'
 
 gem 'actionpack', "~> 4.1.0"
 gem 'activesupport', "~> 4.1.0"
+gem 'rspec', "2.14.1"
