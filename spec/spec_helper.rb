@@ -19,7 +19,8 @@ RSpec.configure do |config|
   config.order = 'random'
 
   config.before(:each) do
-    Rails = double(root: Pathname.new(__FILE__).dirname,
-                   env: double(to_s: "test", test?: true))
+    Rails = double(:rails) unless defined?(Rails)
+    Rails.stub(:root).and_return(Pathname.new(__FILE__).dirname)
+    Rails.stub(:env).and_return(double(to_s: "test", test?: true))
   end
 end
