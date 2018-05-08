@@ -12,6 +12,7 @@ test/tmp
 test/version_tmp
 tmp
 .octopolo.yml
+Gemfile.lock
 
 # YARD artifacts
 .yardoc
