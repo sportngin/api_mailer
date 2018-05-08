@@ -7,6 +7,10 @@
 
 require 'active_support/hash_with_indifferent_access'
 require "api_mailer"
+
+module Rails
+end
+
 RSpec.configure do |config|
   config.treat_symbols_as_metadata_keys_with_true_values = true
   config.run_all_when_everything_filtered = true
@@ -19,7 +23,6 @@ RSpec.configure do |config|
   config.order = 'random'
 
   config.before(:each) do
-    Rails = double(:rails) unless defined?(Rails)
     Rails.stub(:root).and_return(Pathname.new(__FILE__).dirname)
     Rails.stub(:env).and_return(double(to_s: "test", test?: true))
   end
