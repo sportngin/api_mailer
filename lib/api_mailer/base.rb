@@ -117,7 +117,7 @@ module ApiMailer
       }
 
       ActiveSupport::Notifications.instrument("process.api_mailer", payload) do
-        lookup_context.skip_default_locale!
+        lookup_context.skip_default_locale! if lookup_context.respond_to?(:skip_default_locale!)
 
         super
       end
