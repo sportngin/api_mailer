@@ -10,7 +10,7 @@ ApiMailer::Configuration.instance_eval do
   end
 
   def load_config
-    if File.exists?(filepath)
+    if File.exist?(filepath)
       ActiveSupport::HashWithIndifferentAccess.new(load_yaml(ERB.new(File.read(filepath)).result)[Rails.env.to_s])
     else
       raise Exception.new("File not found: config/api_mailer.yml")
