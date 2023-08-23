@@ -79,7 +79,7 @@ module ApiMailer
         templates_name = headers.delete(:template_name) || action_name
 
         each_template(templates_path(headers), templates_name) do |template|
-          self.formats = template.formats
+          self.formats = template.formats || template.format
 
           self.responses << {
             body: render(template: template),
