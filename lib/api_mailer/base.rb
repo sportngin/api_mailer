@@ -98,7 +98,7 @@ module ApiMailer
       if templates.empty?
         raise ActionView::MissingTemplate.new(paths, name, paths, false, 'mailer')
       else
-        templates.uniq { |t| t.formats }.each(&block)
+        templates.uniq { |t| (t.formats || [t.format])}.each(&block)
       end
     end
 
