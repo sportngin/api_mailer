@@ -79,7 +79,7 @@ module ApiMailer
         templates_name = headers.delete(:template_name) || action_name
 
         each_template(templates_path(headers), templates_name) do |template|
-          self.formats = template.formats || [template.format]
+          self.formats = template.respond_to?(:formats) ? template.formats : [template.format]
 
           self.responses << {
             body: render(template: template),
@@ -98,7 +98,7 @@ module ApiMailer
       if templates.empty?
         raise ActionView::MissingTemplate.new(paths, name, paths, false, 'mailer')
       else
-        templates.uniq { |t| (t.formats || [t.format])}.each(&block)
+        templates.uniq { |t| (t.respond_to?(:formats) ? t.formats : [template.format])}.each(&block)
       end
     end
 
