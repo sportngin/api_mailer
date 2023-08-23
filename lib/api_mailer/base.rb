@@ -80,7 +80,7 @@ module ApiMailer
 
         each_template(templates_path(headers), templates_name) do |template|
           self.formats = template.formats || template.format
-# hmmm?
+
           self.responses << {
             body: render(template: template),
             content_type: (template.respond_to?(:type) ? template.type : template.mime_type).to_s
